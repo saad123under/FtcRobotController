@@ -7,27 +7,36 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp
 public class ftc_decode2026 extends OpMode {
-    private DcMotor frontright , backright ;
+    private DcMotor frontright , backright , thrower_right , thrower_left;
     double throttle;
     double spin;
     @Override
     public void init() {
-        frontright = hardwareMap.get(DcMotor.class,"driverL");
-        backright = hardwareMap.get(DcMotor.class, "driverR");
+        frontright = hardwareMap.get(DcMotor.class,"DriveL");
+        backright = hardwareMap.get(DcMotor.class, "DriveR");
+        thrower_right = hardwareMap.get(DcMotor.class,"liftR");
+        thrower_left = hardwareMap.get(DcMotor.class,"liftL");
 
         frontright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        thrower_left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        thrower_right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         frontright.setDirection(DcMotorSimple.Direction.REVERSE);
         backright.setDirection(DcMotorSimple.Direction.FORWARD);
+        thrower_right.setDirection(DcMotorSimple.Direction.REVERSE);
+        thrower_left.setDirection(DcMotorSimple.Direction.FORWARD);
 
     }
 
 
     @Override
     public void loop() {
+        spin = gamepad1.left_stick_x;
+        throttle = -gamepad1.left_stick_y;
         double leftPower = throttle + spin ;
         double rightPower = throttle - spin;
+        double throwerpower = 1.6;
         double largest = Math.max(Math.abs(leftPower) ,Math.abs(rightPower));
         if(largest > 1.0){
             leftPower /= largest;
@@ -36,6 +45,10 @@ public class ftc_decode2026 extends OpMode {
         }
         frontright.setPower(leftPower);
         backright.setPower(rightPower);
+        if(gamepad1.a){
+            thrower_left.setPower(throwerpower);
+            thrower_right.setPower(throwerpower);   
+        }
     }
 
 
