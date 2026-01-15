@@ -12,8 +12,8 @@ public class ftc_decode2026 extends OpMode {
     double spin;
     @Override
     public void init() {
-        frontright = hardwareMap.get(DcMotor.class,"DriveL");
-        backright = hardwareMap.get(DcMotor.class, "DriveR");
+        backright = hardwareMap.get(DcMotor.class,"DriveL");
+        frontright = hardwareMap.get(DcMotor.class, "DriveR");
         thrower_right = hardwareMap.get(DcMotor.class,"liftR");
         thrower_left = hardwareMap.get(DcMotor.class,"liftL");
 
