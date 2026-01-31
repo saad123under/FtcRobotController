@@ -1,20 +1,22 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+@Config
 @TeleOp(name = "PID Straight Drive")
 public class drive_train extends LinearOpMode {
     private DcMotor leftMotor, rightMotor;
     private BNO055IMU imu;
 
     // PID Constants - SET THESE BEFORE RUNNING
-    private double Kp = 0.025;   // Proportional
-    private double Ki = 0.001;   // Integral
-    private double Kd = 0.005;   // Derivative
+    public static double Kp = 0.025;   // Proportional
+    public static double Ki = 0.001;   // Integral
+    public static double Kd = 0.005;   // Derivative
 
     // PID variables
     private double integralSum = 0;
